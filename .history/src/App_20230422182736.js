@@ -105,16 +105,11 @@ const renderPlaylistTracks = () => {
       const durationString = durationInMin.toFixed(2) + ' minutes';
       return (
           <div key={track.track.id}>
-            
               {track.track.name} - {durationString} - {track.track.artists.map(artist => artist.name).join(", ")}
-              {/* ideal algo  list for selected playlist that fits in time frame // if duration =< 480000ms append that to an array and then we can map through that list and then print it */}
-          
           </div>
       );
   });
 };
-
-
 
 return (
     <div className="bg-white">
