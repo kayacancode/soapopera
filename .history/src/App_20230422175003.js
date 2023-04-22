@@ -56,6 +56,30 @@ function App() {
         window.localStorage.removeItem("token")
     }
 
+    const searchArtists = async (e) => {
+        e.preventDefault()
+        const {data} = await axios.get("https://api.spotify.com/v1/search", {
+            headers: {
+                Authorization: `Bearer ${token}`
+            },
+            params: {
+                q: searchKey,
+                type: "artist"
+            }
+        })
+
+        setArtists(data.artists.items)
+    }
+
+    // const renderArtists = () => {
+    //     return artists.map(artist => (
+    //         <div key={artist.id}>
+    //             {artist.images.length ? <img  className = "rounded-md text-center " src={artist.images[0].url} alt=""/> : <div>No Image</div>}
+    //             {artist.name}
+    //         </div>
+    //     ))
+    // }
+
     const handlePlaylistClick = async (playlist) => {
         setSelectedPlaylist(playlist)
 
@@ -75,7 +99,7 @@ function App() {
     const renderPlaylists = () => {
         return playlists.map(playlist => (
             <div key={playlist.id}  className = "text-center" onClick={() => handlePlaylistClick(playlist)}>
-                {playlist.images.length ? <img className="mx-auto rounded-md" width={200} src={playlist.images[0].url} alt=""/> : <div>No Image</div>}
+                {playlist.images.length ? <img  src={playlist.images[0].url} alt=""/> : <div>No Image</div>}
             {playlist.name}
         </div>
     ))
@@ -116,15 +140,15 @@ return (
         <header className="App-header">
             <h1 className="text-[#8582d9]">Welcome to Soap Opera! </h1>
             {!token ?
-                <a  className = "" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login
+                <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login
                     to Spotify</a>
                 : <button  className = "" onClick={logout}>Logout</button>}
 
             {token ?
-                <div className="text-center">
-                    <h1 >Select a Spotify Playlist and then scroll to the buttom of the page</h1>
+                <div>
+                    <h1>Select a Spotify Playlist</h1>
 
-                    <h2 >My Playlists:</h2>
+                    <h2>My Playlists:</h2>
                     {renderPlaylists()}
 
                     {selectedPlaylist && (
@@ -136,10 +160,15 @@ return (
 
                 </div>
 
-                : <h2></h2>
+                : <h2>Please login</h2>
             }
 
-       
+            {/* {artists.length > 0 && (
+                <div>
+                    <h2>Search Results:</h2>
+                    {renderArtists()}
+                </div>
+            )} */}
 
         </header>
     </div>

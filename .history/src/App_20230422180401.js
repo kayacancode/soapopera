@@ -121,10 +121,10 @@ return (
                 : <button  className = "" onClick={logout}>Logout</button>}
 
             {token ?
-                <div className="text-center">
-                    <h1 >Select a Spotify Playlist and then scroll to the buttom of the page</h1>
+                <div>
+                    <h1>Select a Spotify Playlist</h1>
 
-                    <h2 >My Playlists:</h2>
+                    <h2>My Playlists:</h2>
                     {renderPlaylists()}
 
                     {selectedPlaylist && (
@@ -136,7 +136,7 @@ return (
 
                 </div>
 
-                : <h2></h2>
+                
             }
 
        

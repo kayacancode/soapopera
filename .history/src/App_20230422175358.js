@@ -56,6 +56,10 @@ function App() {
         window.localStorage.removeItem("token")
     }
 
+ 
+
+   
+
     const handlePlaylistClick = async (playlist) => {
         setSelectedPlaylist(playlist)
 
@@ -116,15 +120,15 @@ return (
         <header className="App-header">
             <h1 className="text-[#8582d9]">Welcome to Soap Opera! </h1>
             {!token ?
-                <a  className = "" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login
+                <a href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login
                     to Spotify</a>
                 : <button  className = "" onClick={logout}>Logout</button>}
 
             {token ?
-                <div className="text-center">
-                    <h1 >Select a Spotify Playlist and then scroll to the buttom of the page</h1>
+                <div>
+                    <h1>Select a Spotify Playlist</h1>
 
-                    <h2 >My Playlists:</h2>
+                    <h2>My Playlists:</h2>
                     {renderPlaylists()}
 
                     {selectedPlaylist && (
@@ -136,10 +140,15 @@ return (
 
                 </div>
 
-                : <h2></h2>
+                : <h2>Please login</h2>
             }
 
-       
+            {/* {artists.length > 0 && (
+                <div>
+                    <h2>Search Results:</h2>
+                    {renderArtists()}
+                </div>
+            )} */}
 
         </header>
     </div>
