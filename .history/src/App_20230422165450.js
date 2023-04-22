@@ -3,7 +3,7 @@ import './App.css';
 import axios from 'axios';
 
 function App() {
-    const CLIENT_ID = "11e1a8a6d9664d7f9eefd2e7de958a15"
+    const CLIENT_ID = "c14160d6eff8434f8d5d95c497fc11a3"
     const REDIRECT_URI = "http://localhost:3000"
     const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
     const RESPONSE_TYPE = "token"
@@ -121,19 +121,13 @@ const renderusertracks = () => {
         </div>
     })
 }
-
 const renderPlaylistTracks = () => {
-  return playlistTracks.map(track => {
-      const durationInMs = track.track.duration_ms;
-      const durationInMin = durationInMs / 60000;
-      const durationString = durationInMin.toFixed(2) + ' minutes';
-      return (
-          <div key={track.track.id}>
-              {track.track.name} - {durationString} - {track.track.artists.map(artist => artist.name).join(", ")}
-          </div>
-      );
-  });
-};
+    return playlistTracks.map(track => (
+        <div key={track.track.id}>
+            {track.track.name} - {track.track.artists.map(artist => artist.name).join(", ")}
+        </div>
+    ))
+}
 
 return (
     <div className="App">
@@ -146,10 +140,13 @@ return (
 
             {token ?
                 <div>
-                    <h1>Select a Spotify Platlist</h1>
+                    <form onSubmit={searchArtists}>
+                        <input type="text" onChange={e => setSearchKey(e.target.value)}/>
+                        <button type={"submit"}>Search</button>
+                    </form>
 
                     <h2>My Playlists:</h2>
-                    {renderPlaylists()}
+                    {/* {renderPlaylists()} */}
 
                     {selectedPlaylist && (
                         <div>

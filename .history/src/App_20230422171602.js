@@ -146,7 +146,7 @@ return (
 
             {token ?
                 <div>
-                    <h1>Select a Spotify Platlist</h1>
+                    
 
                     <h2>My Playlists:</h2>
                     {renderPlaylists()}

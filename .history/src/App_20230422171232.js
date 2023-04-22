@@ -123,17 +123,17 @@ const renderusertracks = () => {
 }
 
 const renderPlaylistTracks = () => {
-  return playlistTracks.map(track => {
-      const durationInMs = track.track.duration_ms;
-      const durationInMin = durationInMs / 60000;
-      const durationString = durationInMin.toFixed(2) + ' minutes';
-      return (
-          <div key={track.track.id}>
-              {track.track.name} - {durationString} - {track.track.artists.map(artist => artist.name).join(", ")}
-          </div>
-      );
-  });
-};
+
+  const durationInMs = track.track.duration_ms;
+  const durationInMin = durationInMs / 60000;
+
+    return playlistTracks.map(track => (
+      
+        <div key={track.track.id}>
+            {track.track.name} - {track.track.duration_ms} - {track.track.artists.map(artist => artist.name).join(", ")}
+        </div>
+    ))
+}
 
 return (
     <div className="App">
@@ -146,7 +146,10 @@ return (
 
             {token ?
                 <div>
-                    <h1>Select a Spotify Platlist</h1>
+                    <form onSubmit={searchArtists}>
+                        <input type="text" onChange={e => setSearchKey(e.target.value)}/>
+                        <button type={"submit"}>Search</button>
+                    </form>
 
                     <h2>My Playlists:</h2>
                     {renderPlaylists()}
