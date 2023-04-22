@@ -74,7 +74,7 @@ function App() {
     const renderArtists = () => {
         return artists.map(artist => (
             <div key={artist.id}>
-                {artist.images.length ? <img width={150} className = "rounded-md" src={artist.images[0].url} alt=""/> : <div>No Image</div>}
+                {artist.images.length ? <img width={"60"} src={artist.images[0].url} alt=""/> : <div>No Image</div>}
                 {artist.name}
             </div>
         ))
@@ -99,7 +99,7 @@ function App() {
     const renderPlaylists = () => {
         return playlists.map(playlist => (
             <div key={playlist.id} onClick={() => handlePlaylistClick(playlist)}>
-                {playlist.images.length ? <img width={"150"} src={playlist.images[0].url} alt=""/> : <div>No Image</div>}
+                {playlist.images.length ? <img width={"100%"} src={playlist.images[0].url} alt=""/> : <div>No Image</div>}
             {playlist.name}
         </div>
     ))

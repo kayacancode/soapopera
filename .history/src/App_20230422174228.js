@@ -74,7 +74,7 @@ function App() {
     const renderArtists = () => {
         return artists.map(artist => (
             <div key={artist.id}>
-                {artist.images.length ? <img width={150} className = "rounded-md" src={artist.images[0].url} alt=""/> : <div>No Image</div>}
+                {artist.images.length ? <img width={150} src={artist.images[0].url} alt=""/> : <div>No Image</div>}
                 {artist.name}
             </div>
         ))
