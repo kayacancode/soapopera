@@ -146,7 +146,10 @@ return (
 
             {token ?
                 <div>
-                    <h1>Select a Spotify Platlist</h1>
+                    <form onSubmit={searchArtists}>
+                        <input type="text" onChange={e => setSearchKey(e.target.value)}/>
+                        <button type={"submit"}>Search</button>
+                    </form>
 
                     <h2>My Playlists:</h2>
                     {renderPlaylists()}
