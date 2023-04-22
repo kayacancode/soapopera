@@ -136,7 +136,7 @@ const renderPlaylistTracks = () => {
 };
 
 return (
-    <div className="bg-white">
+    <div className="App">
         <header className="App-header">
             <h1 className="text-[#8582d9]">Welcome to Soap Opera! </h1>
             {!token ?
