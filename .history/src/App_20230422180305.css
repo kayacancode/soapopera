@@ -22,14 +22,13 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: black;
-  
 }
 
-.App-header a, button{
+.App-header a{
   background-color: #8582d9;
   color:white; 
   padding: 10px;
-  margin: 20px;
+  
   border-radius: 20px;
 
 }

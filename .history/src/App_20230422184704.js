@@ -99,22 +99,29 @@ const renderusertracks = () => {
 }
 
 const renderPlaylistTracks = () => {
-  return playlistTracks.map(track => {
-      const durationInMs = track.track.duration_ms;
-      const durationInMin = durationInMs / 60000;
-      const durationString = durationInMin.toFixed(2) + ' minutes';
-      return (
-          <div key={track.track.id}>
-            
-              {track.track.name} - {durationString} - {track.track.artists.map(artist => artist.name).join(", ")}
-              {/* ideal algo  list for selected playlist that fits in time frame // if duration =< 480000ms append that to an array and then we can map through that list and then print it */}
-          
-          </div>
-      );
-  });
+  let totalDuration = 0;
+  const tracksToRender = [];
+
+  // Calculate the total duration and filter tracks
+  for (const track of playlistTracks) {
+    const durationInMs = track.track.duration_ms;
+    const durationInMin = durationInMs / 60000;
+    totalDuration += durationInMin;
+
+    if (totalDuration <= 8) {
+      tracksToRender.push(track);
+    } else {
+      break; // Exit the loop if we exceed the time limit
+    }
+  }
+
+  // Render the filtered tracks
+  return tracksToRender.map(track => (
+    <div key={track.track.id}>
+      {track.track.name} - {durationInMin.toFixed(2)} minutes - {track.track.artists.map(artist => artist.name).join(", ")}
+    </div>
+  ));
 };
-
-
 
 return (
     <div className="bg-white">

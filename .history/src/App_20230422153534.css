@@ -14,24 +14,14 @@
 }
 
 .App-header {
-  background-color: white;
+  background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: black;
-  
-}
-
-.App-header a, button{
-  background-color: #8582d9;
-  color:white; 
-  padding: 10px;
-  margin: 20px;
-  border-radius: 20px;
-
+  color: white;
 }
 
 .App-link {

@@ -105,32 +105,26 @@ const renderPlaylistTracks = () => {
       const durationString = durationInMin.toFixed(2) + ' minutes';
       return (
           <div key={track.track.id}>
-            
               {track.track.name} - {durationString} - {track.track.artists.map(artist => artist.name).join(", ")}
-              {/* ideal algo  list for selected playlist that fits in time frame // if duration =< 480000ms append that to an array and then we can map through that list and then print it */}
-          
           </div>
       );
   });
 };
 
-
-
 return (
     <div className="bg-white">
         <header className="App-header">
             <h1 className="text-[#8582d9]">Welcome to Soap Opera! </h1>
-            <p className="text-center  " >Don't take too long in the shower! With Soap Opera you pick the playlist and we pick the best songs to limit your water waste</p>
             {!token ?
                 <a  className = "" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login
                     to Spotify</a>
                 : <button  className = "" onClick={logout}>Logout</button>}
 
             {token ?
-                <div className="text-center">
-                    <h1 >Select a Spotify Playlist and then scroll to the buttom of the page</h1>
+                <div>
+                    <h1 className="text-center">Select a Spotify Playlist and then scroll to the buttom of the page</h1>
 
-                    <h2 >My Playlists:</h2>
+                    <h2>My Playlists:</h2>
                     {renderPlaylists()}
 
                     {selectedPlaylist && (
