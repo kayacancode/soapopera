@@ -7,7 +7,7 @@ function App() {
     const REDIRECT_URI = "http://localhost:3000"
     const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
     const RESPONSE_TYPE = "token"
-    const [isModalOpen, setIsModalOpen] = useState(false)
+
     const [token, setToken] = useState("")
     const [searchKey, setSearchKey] = useState("")
     const [artists, setArtists] = useState([])
@@ -56,9 +56,6 @@ function App() {
         window.localStorage.removeItem("token")
     }
 
-    const openModal = () => {
-      setIsModalOpen(true);
-    }
     const handlePlaylistClick = async (playlist) => {
         setSelectedPlaylist(playlist)
 
@@ -70,13 +67,9 @@ function App() {
             })
 
             setPlaylistTracks(data.items)
-            openModal()
         } catch (e) {
             console.error(e)
         }
-    }
-    const closeModal = () => {
-      setIsModalOpen(false);
     }
     const renderPlaylists = () => {
       return playlists.map((playlist) => (
@@ -193,20 +186,7 @@ return (
             {selectedPlaylist && (
               <div>
                 <h2>{selectedPlaylist.name} Tracks:</h2>
-                {isModalOpen && (
-  <div
-    className="fixed inset-0 flex items-center justify-center z-50"
-    style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-  >
-    <div className="bg-white p-6 rounded-md max-h-full overflow-y-auto">
-      <button onClick={closeModal} className="float-right">
-        X
-      </button>
-      <h2 className="text-xl mb-4">{selectedPlaylist && selectedPlaylist.name} Tracks:</h2>
-      <div>{renderPlaylistTracks()}</div>
-    </div>
-  </div>
-)}
+                {renderPlaylistTracks()}
               </div>
             )}
           </div>
