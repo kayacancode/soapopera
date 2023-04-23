@@ -159,60 +159,74 @@ const renderPlaylistTracks = () => {
 };
 
 
-
 return (
     <div className="bg-white">
-        <header className="App-header">
-            
-            {!token ?
+        {!token ?
             <div className="text-center">
-              <h1 className="text-[#8582d9]  w-full text-center">Welcome to Soap Opera! </h1>
-            <p className="text-center  " >Don't take too long in the shower! With Soap Opera you pick the playlist and we pick the best songs to limit your water waste</p>
-                <a  className = "text-center" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login
-                    to Spotify</a></div>
-                :
-                <div className="">
+                <h1 className="text-[#8582d9]  w-full text-center">Welcome to Soap Opera! </h1>
+                <p className="text-center  " >Don't take too long in the shower! With Soap Opera you pick the playlist and we pick the best songs to limit your water waste</p>
+                <a  className = "text-center" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login to Spotify</a>
+            </div>
+            :
+            <div className="">
                     <h1 className="text-[#8582d9]  text-center">Soap Opera </h1>
 
-                 <button className = "" onClick={logout}>Logout</button>
-                 </div>
-                 }
-                
-
-                {token ? (
-          <div className="text-center">
-            <h1>Select a Spotify Playlist and then scroll to the bottom of the page</h1>
-
-            <h2>My Playlists:</h2>
-            <div className="playlists-grid">{renderPlaylists()}</div>
-
-            {selectedPlaylist && (
-              <div>
-                <h2>{selectedPlaylist.name} Tracks:</h2>
-                {isModalOpen && (
-  <div
-    className="fixed inset-0 flex items-center justify-center z-50"
-    style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}
-  >
-    <div className="bg-white p-6 rounded-md max-h-full overflow-y-auto">
-      <button onClick={closeModal} className="float-right">
-        X
-      </button>
-      <h2 className="text-xl mb-4">{selectedPlaylist && selectedPlaylist.name} Tracks:</h2>
-      <div>{renderPlaylistTracks()}</div>
-    </div>
-  </div>
-)}
-              </div>
+                 <button className = "text-center" onClick={logout}>Logout</button>
+            </div>
+        }
+        {token ? (
+            <div className="text-center">
+                <h1>Select a Spotify Playlist and then scroll to the bottom of the page</h1>
+                <h2>My Playlists:</h2>
+                <div className="playlists-grid">{renderPlaylists()}</div>
+                {selectedPlaylist && (
+                <div>
+                    <h2>{selectedPlaylist.name} Tracks:</h2>
+                    {isModalOpen && (
+                    <div
+                        className="fixed inset-0 flex items-center justify-center z-50"
+                        style={{ backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+                        <div className="bg-white p-6 rounded-md max-h-full overflow-y-auto">
+                            <button onClick={closeModal} className="float-right">X</button>
+                            <h2 className="text-xl mb-4">{selectedPlaylist && selectedPlaylist.name} Tracks:</h2>
+                        <div>{renderPlaylistTracks()}</div>
+                        </div>
+                    </div>)}
+                </div>)}
+            </div>)
+            : (
+                <h2></h2>
             )}
-          </div>
-        ) : (
-          <h2></h2>
-        )}
-       
-
-        </header>
     </div>
 );
 }
     export default App;
+
+
+// return (
+//     <div className="bg-white">
+//         {!token &&
+//             <body className="App-header">
+//                 <div className="text-center">
+//                     <h1 className="text-[#8582d9]  w-full text-center">SoapOpera</h1>
+//                     <p className="text-center" >Don't take too long in the shower! With Soap Opera you pick the playlist and we pick the best songs to limit your water waste</p>
+//                     <a  className = "text-center" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login
+//                     to Spotify</a>
+//                 </div>
+//             </body>
+//         {token &&
+//             <div className="text-center">
+//                 <h1 className="text-[#8582d9]  w-full text-center">SoapOpera</h1>
+//                 <button  className = "" onClick={logout}>Logout</button>
+//                 <h1 >Select a Spotify Playlist and then scroll to the buttom of the page</h1>
+//                     <h2 >My Playlists:</h2>
+//                     {renderPlaylists()}
+//                     {selectedPlaylist && (
+//                         <div>
+//                             <h2>{selectedPlaylist.name} Tracks:</h2>
+//                             {renderPlaylistTracks()}
+//                         </div>
+//                     )}
+//             </div>}
+//     </div>
+// );
