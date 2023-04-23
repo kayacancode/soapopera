@@ -15,6 +15,9 @@ function App() {
     const [selectedPlaylist, setSelectedPlaylist] = useState(null)
     const [playlistTracks, setPlaylistTracks] = useState([])
     const [userTracks, setUserTracks] = useState([])
+    // const spotifyPlayer = window.spotifyPlayer;
+    // const [spotifyPlayer, setSpotifyPlayer] = useState(null);
+
 
     useEffect(() => {
         const hash = window.location.hash
@@ -25,11 +28,8 @@ function App() {
             window.localStorage.setItem("token", token)
         }
         setToken(token)
-    }, [])
-
-    useEffect(() => {
-
-    }, [])
+        }, []
+    )
 
     useEffect(() => {
         const getPlaylists = async () => {
@@ -46,10 +46,10 @@ function App() {
         }
 
         if (token) {
-            getPlaylists()
+            getPlaylists();
         }
-
-    }, [token])
+        }, [token]
+    )
 
     const logout = () => {
         setToken("")
@@ -59,6 +59,7 @@ function App() {
     const openModal = () => {
       setIsModalOpen(true);
     }
+
     const handlePlaylistClick = async (playlist) => {
         setSelectedPlaylist(playlist)
         try {
@@ -71,9 +72,11 @@ function App() {
             console.error(e)
         }
     }
+
     const closeModal = () => {
       setIsModalOpen(false);
     }
+
     const renderPlaylists = () => {
       return playlists.map((playlist) => (
         <div
@@ -96,37 +99,60 @@ function App() {
       ));
     };
 
-const renderUserTracks = () => {
-    return userTracks.map(userTracks => (
-        <div className = "" key={userTracks.id} onClick={() => handlePlaylistClick(userTracks)}>
-        {userTracks.name}
-    </div>
-))
-}
-
-const renderusertracks = () => {
-    return userTracks.map(track => {
-        <div key={track.track.id}>
-   {track.track.name} - {track.track.artists.map(artist => artist.name).join(", ")}
-
+    const renderUserTracks = () => {
+        return userTracks.map(userTracks => (
+            <div className = "" key={userTracks.id} onClick={() => handlePlaylistClick(userTracks)}>
+            {userTracks.name}
         </div>
-    })
-}
+    ))
+    }
 
-//shuffle playlistTracks
-function shuffle(array) {
-let currentIndex = array.length,  randomIndex;
-// While there remain elements to shuffle.
-while (currentIndex != 0) {
-    // Pick a remaining element.
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-    array[randomIndex], array[currentIndex]];
-}
-return array;
-}
+    const renderusertracks = () => {
+        return userTracks.map(track => {
+            <div key={track.track.id}>
+    {track.track.name} - {track.track.artists.map(artist => artist.name).join(", ")}
+
+            </div>
+        })
+    }
+
+    //shuffle playlistTracks
+    function shuffle(array) {
+    let currentIndex = array.length,  randomIndex;
+    // While there remain elements to shuffle.
+    while (currentIndex != 0) {
+        // Pick a remaining element.
+        randomIndex = Math.floor(Math.random() * currentIndex);
+        currentIndex--;
+        // And swap it with the current element.
+        [array[currentIndex], array[randomIndex]] = [
+        array[randomIndex], array[currentIndex]];
+    }
+    return array;
+    }
+
+
+// const initializeSpotifyPlayer = () => {
+//     if (window.Spotify) {
+//       const player = new window.Spotify.Player({
+//         name: "Soap Opera",
+//         getOAuthToken: (cb) => {
+//           cb(token);
+//         },
+//       });
+  
+//       player.connect();
+  
+//       player.addListener("ready", ({ device_id }) => {
+//         console.log("Ready with Device ID", device_id);
+//         setSpotifyPlayer(player);
+//       });
+  
+//       player.addListener("not_ready", ({ device_id }) => {
+//         console.log("Device ID has gone offline", device_id);
+//       });
+//     }
+//   };
 
 const renderPlaylistTracks = () => {
   let totalDurationInMs = 0;
@@ -145,7 +171,7 @@ const renderPlaylistTracks = () => {
         //do nothing
     }
     }
-//hello kaya 
+
     return tracksToRender.map(track => {
         const durationInMs = track.track.duration_ms;
         const durationInMin = durationInMs / 60000;
@@ -154,6 +180,27 @@ const renderPlaylistTracks = () => {
         <div key={track.track.id}>
             {track.track.name} - {durationString} - {track.track.artists.map(artist => artist.name).join(", ")}
         </div>
+        // <div key={track.track.id} onClick={() => {
+        //     if (spotifyPlayer) {
+        //         spotifyPlayer._options.getOAuthToken((accessToken) => {
+        //         axios
+        //             .put(
+        //             `https://api.spotify.com/v1/me/player/play?device_id=${spotifyPlayer._options.id}`,
+        //             { uris: [track.track.uri] },
+        //             {
+        //                 headers: {
+        //                 Authorization: `Bearer ${accessToken}`,
+        //                 },
+        //             }
+        //             )
+        //             .catch((error) => console.error(error));
+        //         });
+        //         }
+        //     }}
+        //     >
+        //       {track.track.name} - {durationString} -{" "}
+        //       {track.track.artists.map((artist) => artist.name).join(", ")}
+        //     </div>
         );
         });
     };
