@@ -15,19 +15,18 @@ function App() {
     const [selectedPlaylist, setSelectedPlaylist] = useState(null)
     const [playlistTracks, setPlaylistTracks] = useState([])
     const [userTracks, setUserTracks] = useState([])
-
     useEffect(() => {
         const hash = window.location.hash
         let token = window.localStorage.getItem("token")
+
         if (!token && hash) {
             token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
+
             window.location.hash = ""
             window.localStorage.setItem("token", token)
         }
-        setToken(token)
-    }, [])
 
-    useEffect(() => {
+        setToken(token)
 
     }, [])
 
@@ -39,6 +38,7 @@ function App() {
                         Authorization: `Bearer ${token}`
                     },
                 })
+
                 setPlaylists(data.items)
             } catch (e) {
                 console.error(e)
@@ -61,10 +61,14 @@ function App() {
     }
     const handlePlaylistClick = async (playlist) => {
         setSelectedPlaylist(playlist)
+
         try {
-            const {data} = 
-                await axios.get(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks`, {
-                headers: {Authorization: `Bearer ${token}`},})
+            const {data} = await axios.get(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks`, {
+                headers: {
+                    Authorization: `Bearer ${token}`
+                },
+            })
+
             setPlaylistTracks(data.items)
             openModal()
         } catch (e) {
@@ -214,5 +218,5 @@ return (
         </header>
     </div>
 );
-}
-    export default App;
+            }
+            export default App;

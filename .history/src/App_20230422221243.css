@@ -55,7 +55,7 @@
 .playlists-grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 6rem;
+  gap: 3rem;
 }
 @keyframes App-logo-spin {
   from {
