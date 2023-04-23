@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import './App.css';
 import axios from 'axios';
-// hi
+
 function App() {
     const CLIENT_ID = "11e1a8a6d9664d7f9eefd2e7de958a15"
     const REDIRECT_URI = "http://localhost:3000"
@@ -98,26 +98,9 @@ const renderusertracks = () => {
     })
 }
 
-//shuffle playlistTracks
-function shuffle(array) {
-let currentIndex = array.length,  randomIndex;
-// While there remain elements to shuffle.
-while (currentIndex != 0) {
-    // Pick a remaining element.
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-    array[randomIndex], array[currentIndex]];
-}
-return array;
-}
-
 const renderPlaylistTracks = () => {
   let totalDurationInMs = 0;
   const tracksToRender = [];
-
-  shuffle(playlistTracks);
 
   for (const track of playlistTracks) {
     const durationInMs = track.track.duration_ms;
@@ -127,7 +110,7 @@ const renderPlaylistTracks = () => {
       tracksToRender.push(track);
       totalDurationInMs += durationInMs;
     } else {
-        //do nothing
+       // do nothing
     }
   }
 
@@ -148,7 +131,7 @@ const renderPlaylistTracks = () => {
 return (
     <div className="bg-white">
         <header className="App-header">
-            <h1 className="text-[#8582d9] bg-black w-full text-center">Welcome to Soap Opera! </h1>
+            <h1 className="text-[#8582d9] bg-black w-full">Welcome to Soap Opera! </h1>
             <p className="text-center  " >Don't take too long in the shower! With Soap Opera you pick the playlist and we pick the best songs to limit your water waste</p>
             {!token ?
                 <a  className = "" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login
@@ -157,7 +140,6 @@ return (
 
             {token ?
                 <div className="text-center">
-
                     <h1 >Select a Spotify Playlist and then scroll to the buttom of the page</h1>
 
                     <h2 >My Playlists:</h2>

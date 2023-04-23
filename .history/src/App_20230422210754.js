@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import './App.css';
 import axios from 'axios';
-// hi
+
 function App() {
     const CLIENT_ID = "11e1a8a6d9664d7f9eefd2e7de958a15"
     const REDIRECT_URI = "http://localhost:3000"
@@ -98,27 +98,10 @@ const renderusertracks = () => {
     })
 }
 
-//shuffle playlistTracks
-function shuffle(array) {
-let currentIndex = array.length,  randomIndex;
-// While there remain elements to shuffle.
-while (currentIndex != 0) {
-    // Pick a remaining element.
-    randomIndex = Math.floor(Math.random() * currentIndex);
-    currentIndex--;
-    // And swap it with the current element.
-    [array[currentIndex], array[randomIndex]] = [
-    array[randomIndex], array[currentIndex]];
-}
-return array;
-}
-
 const renderPlaylistTracks = () => {
   let totalDurationInMs = 0;
   const tracksToRender = [];
-
-  shuffle(playlistTracks);
-
+  
   for (const track of playlistTracks) {
     const durationInMs = track.track.duration_ms;
     const durationInMin = durationInMs / 60000;
@@ -127,7 +110,7 @@ const renderPlaylistTracks = () => {
       tracksToRender.push(track);
       totalDurationInMs += durationInMs;
     } else {
-        //do nothing
+       // do nothing
     }
   }
 
