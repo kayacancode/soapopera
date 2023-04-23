@@ -101,7 +101,7 @@ const renderusertracks = () => {
 const renderPlaylistTracks = () => {
   let totalDurationInMs = 0;
   const tracksToRender = [];
-  
+
   for (const track of playlistTracks) {
     const durationInMs = track.track.duration_ms;
     const durationInMin = durationInMs / 60000;
@@ -131,7 +131,7 @@ const renderPlaylistTracks = () => {
 return (
     <div className="bg-white">
         <header className="App-header">
-            <h1 className="text-[#8582d9] bg-black w-full text-center">Welcome to Soap Opera! </h1>
+            <h1 className="text-[#8582d9] bg-black w-full">Welcome to Soap Opera! </h1>
             <p className="text-center  " >Don't take too long in the shower! With Soap Opera you pick the playlist and we pick the best songs to limit your water waste</p>
             {!token ?
                 <a  className = "" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login
@@ -140,7 +140,6 @@ return (
 
             {token ?
                 <div className="text-center">
-
                     <h1 >Select a Spotify Playlist and then scroll to the buttom of the page</h1>
 
                     <h2 >My Playlists:</h2>

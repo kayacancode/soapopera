@@ -101,7 +101,7 @@ const renderusertracks = () => {
 const renderPlaylistTracks = () => {
   let totalDurationInMs = 0;
   const tracksToRender = [];
-  
+
   for (const track of playlistTracks) {
     const durationInMs = track.track.duration_ms;
     const durationInMin = durationInMs / 60000;
@@ -140,7 +140,6 @@ return (
 
             {token ?
                 <div className="text-center">
-
                     <h1 >Select a Spotify Playlist and then scroll to the buttom of the page</h1>
 
                     <h2 >My Playlists:</h2>
