@@ -15,7 +15,6 @@ function App() {
     const [selectedPlaylist, setSelectedPlaylist] = useState(null)
     const [playlistTracks, setPlaylistTracks] = useState([])
     const [userTracks, setUserTracks] = useState([])
-
     useEffect(() => {
         const hash = window.location.hash
         let token = window.localStorage.getItem("token")
