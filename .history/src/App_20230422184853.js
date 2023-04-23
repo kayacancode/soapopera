@@ -99,18 +99,13 @@ const renderusertracks = () => {
 }
 
 const renderPlaylistTracks = () => {
-  let totalDurationInMs = 0;
   const tracksToRender = [];
 
   for (const track of playlistTracks) {
     const durationInMs = track.track.duration_ms;
     const durationInMin = durationInMs / 60000;
-
-    if (totalDurationInMs + durationInMs <= 480000) {
+    if (durationInMs <= 480000) {
       tracksToRender.push(track);
-      totalDurationInMs += durationInMs;
-    } else {
-      break; // Exit the loop if we exceed the time limit
     }
   }
 
