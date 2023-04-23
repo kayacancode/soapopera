@@ -19,15 +19,15 @@ function App() {
     useEffect(() => {
         const hash = window.location.hash
         let token = window.localStorage.getItem("token")
-
         if (!token && hash) {
             token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
-
             window.location.hash = ""
             window.localStorage.setItem("token", token)
         }
-
         setToken(token)
+    }, [])
+
+    useEffect(() => {
 
     }, [])
 
@@ -39,7 +39,6 @@ function App() {
                         Authorization: `Bearer ${token}`
                     },
                 })
-
                 setPlaylists(data.items)
             } catch (e) {
                 console.error(e)
@@ -59,14 +58,10 @@ function App() {
 
     const handlePlaylistClick = async (playlist) => {
         setSelectedPlaylist(playlist)
-
         try {
-            const {data} = await axios.get(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                },
-            })
-
+            const {data} = 
+                await axios.get(`https://api.spotify.com/v1/playlists/${playlist.id}/tracks`, {
+                headers: {Authorization: `Bearer ${token}`},})
             setPlaylistTracks(data.items)
         } catch (e) {
             console.error(e)
@@ -148,40 +143,32 @@ const renderPlaylistTracks = () => {
 
 return (
     <div className="bg-white">
-        <header className="App-header">
-            
-            {!token ?
-            <div className="text-center">
-              <h1 className="text-[#8582d9]  w-full text-center">Welcome to Soap Opera! </h1>
-            <p className="text-center  " >Don't take too long in the shower! With Soap Opera you pick the playlist and we pick the best songs to limit your water waste</p>
-                <a  className = "text-center" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login
-                    to Spotify</a></div>
-                : <button  className = "" onClick={logout}>Logout</button>}
-
-            {token ?
+        {!token &&
+            <body className="App-header">
                 <div className="text-center">
-
-                    <h1 >Select a Spotify Playlist and then scroll to the buttom of the page</h1>
-
+                    <h1 className="text-[#8582d9]  w-full text-center">SoapOpera</h1>
+                    <p className="text-center" >Don't take too long in the shower! With Soap Opera you pick the playlist and we pick the best songs to limit your water waste</p>
+                    <a  className = "text-center" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login
+                    to Spotify</a>
+                </div>
+            </body>
+        } 
+        {token &&
+            <div className="text-center">
+                <h1 className="text-[#8582d9]  w-full text-center">SoapOpera</h1>
+                <button  className = "" onClick={logout}>Logout</button>
+                <h1 >Select a Spotify Playlist and then scroll to the buttom of the page</h1>
                     <h2 >My Playlists:</h2>
                     {renderPlaylists()}
-
                     {selectedPlaylist && (
                         <div>
                             <h2>{selectedPlaylist.name} Tracks:</h2>
                             {renderPlaylistTracks()}
                         </div>
                     )}
-
-                </div>
-
-                : <h2></h2>
-            }
-
-       
-
-        </header>
+            </div>
+        }
     </div>
 );
-            }
-            export default App;
+}
+    export default App;
