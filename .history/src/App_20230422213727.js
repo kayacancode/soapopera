@@ -150,7 +150,7 @@ return (
         <header className="App-header">
             
             {!token ?
-            <div className="text-center">
+            <div>
               <h1 className="text-[#8582d9]  w-full text-center">Welcome to Soap Opera! </h1>
             <p className="text-center  " >Don't take too long in the shower! With Soap Opera you pick the playlist and we pick the best songs to limit your water waste</p>
                 <a  className = "text-center" href={`${AUTH_ENDPOINT}?client_id=${CLIENT_ID}&redirect_uri=${REDIRECT_URI}&response_type=${RESPONSE_TYPE}`}>Login
