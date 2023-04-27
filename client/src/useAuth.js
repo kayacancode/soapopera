@@ -22,7 +22,7 @@ export default function useAuth(code) {
       window.history.pushState({}, null, "/")
     })
     .catch(error => {
-      window.location = "/"
+      // window.location = "/"
       console.error(error)
     }) 
   }, [code])
@@ -40,7 +40,7 @@ export default function useAuth(code) {
         })
         .catch(error => {
           console.error(error)
-          window.location = "/"
+          // window.location = "/"
         })
       
     }, (expiresIn - 60) * 1000);

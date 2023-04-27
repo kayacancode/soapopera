@@ -1,6 +1,7 @@
 import React from 'react'
 import useAuth from './useAuth'
 import Player from './Player'
+import Playlist from './Playlist'
 
 export default function Dashboard({code}) {
 
@@ -8,7 +9,7 @@ export default function Dashboard({code}) {
 
     return (
     <div>
-        <Player accessToken={accessToken} trackUri="spotify:track:7yriqF8s3ESXqwuDxUaleo"/>
+        {accessToken ? <Playlist accessToken={accessToken}/> : <></>}
     </div>
     )
 }
