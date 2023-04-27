@@ -1,11 +1,15 @@
 import {useEffect, useState} from "react";
 import './App.css';
 import axios from 'axios';
+import SpotifyPlayer from "./SpotifyPlayer";
+import Login from "./Login";
+import Dashboard from "./Dashboard";
 // hi
 function App() {
     const CLIENT_ID = "11e1a8a6d9664d7f9eefd2e7de958a15"
-    const REDIRECT_URI = "https://soapopera.herokuapp.com/"
-    const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize"
+    const REDIRECT_URI = "http://localhost:3000"
+    // const REDIRECT_URI = "https://soapopera.herokuapp.com/"
+    const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize?client_id=11e1a8a6d9664d7f9eefd2e7de958a15&redirect_uri=http://localhost:3001&scope=user-read-email%20user-read-private%20streaming&response_type=token"
     const RESPONSE_TYPE = "token"
     const [isModalOpen, setIsModalOpen] = useState(false)
     const [token, setToken] = useState("")
@@ -18,18 +22,9 @@ function App() {
     // const spotifyPlayer = window.spotifyPlayer;
     // const [spotifyPlayer, setSpotifyPlayer] = useState(null);
 
+    const code = new URLSearchParams(window.location.search).get("code")
 
-    useEffect(() => {
-        const hash = window.location.hash
-        let token = window.localStorage.getItem("token")
-        if (!token && hash) {
-            token = hash.substring(1).split("&").find(elem => elem.startsWith("access_token")).split("=")[1]
-            window.location.hash = ""
-            window.localStorage.setItem("token", token)
-        }
-        setToken(token)
-        }, []
-    )
+
 
     useEffect(() => {
         const getPlaylists = async () => {
@@ -250,12 +245,16 @@ const renderPlaylistTracks = () => {
             </div>)
     }
 
+    console.log(code)
 return (
     <div className="bg-white">
         <body className="App-header">
-            {!token ? WelcomeMessage() : LoggedIn()}
-            {token ? SelectPlaylist() : <h2></h2>}
+            {code ? <Dashboard code={code}/> : <Login/>}
+            {/* {token ? SelectPlaylist() : <h2></h2>} */}
         </body>
+        {/* <SpotifyPlayer accessToken={token} trackUri="7ixxyJJJKZdo8bsdWwkaB6?si=3ad2af5705394355"/> */}
+
+
     </div>
 );
 }
