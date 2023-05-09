@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "startBuild": "(cd server && npm run devStart) & (cd client && npm start)",
-    "build": "react-scripts build"
+    "build": "react-scripts build",
+    "start": "react-scripts start"
   },
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
@@ -23,5 +24,17 @@
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "spotify-web-api-node": "^5.0.2"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
